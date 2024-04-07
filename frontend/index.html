@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Match Outcome Predictor</h2>
+    <form id="predictionForm">
+        <label for="team1">Team 1:</label>
+        <select id="team1" name="team1" required>
+            <option value="Choose Team">Choose Team</option>
+            <option value="Arsenal">Arsenal</option>
+            <option value="Aston Villa">Aston Villa</option>
+            <option value="Bournemouth">Bournemouth</option>
+            <option value="Brentford">Brentford</option>
+            <option value="Brighton and Hove Albion">Brighton and Hove Albion</option>
+            <option value="Burnley">Burnley</option>
+            <option value="Chelsea">Chelsea</option>
+            <option value="Crystal Palace">Crystal Palace</option>
+            <option value="Everton">Everton</option>
+            <option value="Fulham">Fulham</option>
+            <option value="Leeds United">Leeds United</option>
+            <option value="Leicester City">Leicester City</option>
+            <option value="Liverpool">Liverpool</option>
+            <option value="Luton Town">Luton Town</option>
+            <option value="Manchester City">Manchester City</option>
+            <option value="Manchester United">Manchester United</option>
+            <option value="Newcastle United">Newcastle United</option>
+            <option value="Nottingham Forest">Nottingham Forest</option>
+            <option value="Sheffield United">Sheffield United</option>
+            <option value="Southampton">Southampton</option>
+            <option value="Tottenham Hotspur">Tottenham Hotspur</option>
+            <option value="West Ham United">West Ham United</option>
+            <option value="Wolverhampton Wanderers">Wolverhampton Wanderers</option>
+        </select>
+
+        <label for="team2">Team 2:</label>
+        <select id="team2" name="team2" required>
+            <option value="Choose Team">Choose Team</option>
+            <option value="Arsenal">Arsenal</option>
+            <option value="Aston Villa">Aston Villa</option>
+            <option value="Bournemouth">Bournemouth</option>
+            <option value="Brentford">Brentford</option>
+            <option value="Brighton and Hove Albion">Brighton and Hove Albion</option>
+            <option value="Burnley">Burnley</option>
+            <option value="Chelsea">Chelsea</option>
+            <option value="Crystal Palace">Crystal Palace</option>
+            <option value="Everton">Everton</option>
+            <option value="Fulham">Fulham</option>
+            <option value="Leeds United">Leeds United</option>
+            <option value="Leicester City">Leicester City</option>
+            <option value="Liverpool">Liverpool</option>
+            <option value="Luton Town">Luton Town</option>
+            <option value="Manchester City">Manchester City</option>
+            <option value="Manchester United">Manchester United</option>
+            <option value="Newcastle United">Newcastle United</option>
+            <option value="Nottingham Forest">Nottingham Forest</option>
+            <option value="Sheffield United">Sheffield United</option>
+            <option value="Southampton">Southampton</option>
+            <option value="Tottenham Hotspur">Tottenham Hotspur</option>
+            <option value="West Ham United">West Ham United</option>
+            <option value="Wolverhampton Wanderers">Wolverhampton Wanderers</option>
+        </select>
+
+        <button type="submit">Predict Outcome</button>
+    </form>
+    <div></div>
+    <div id="predictionResult">Predicted Result:</div>
+
+    <script>
+        document.getElementById("predictionForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser.
+            
+            var team1 = document.getElementById("team1").value;
+            var team2 = document.getElementById("team2").value;
+
+            var apiUrl = "/api/predict?team1=" + encodeURIComponent(team1) + "&team2=" + encodeURIComponent(team2);
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("predictionResult").textContent = "Result: " + data.prediction;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
+</body>
+</html>
